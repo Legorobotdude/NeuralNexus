@@ -16,7 +16,7 @@ st.set_page_config(
     }
 )
 
-# Cyberpunk themed CSS
+# Add custom CSS for a more compact interface
 st.markdown("""
     <style>
     /* Main app */
@@ -25,18 +25,18 @@ st.markdown("""
         background-image: linear-gradient(45deg, #0a0a12 0%, #1a1a2f 100%);
     }
     
-    /* Custom header */
+    /* Custom header - reduced padding and margin */
     .main-header {
         text-align: center;
-        padding: 2rem;
-        margin-bottom: 2rem;
+        padding: 1.25rem;
+        margin-bottom: 1.25rem;
         border-bottom: 2px solid #00ff9d40;
         position: relative;
     }
     
     .main-header h1 {
         font-family: 'Courier New', monospace;
-        font-size: 3.5rem;
+        font-size: 2.7rem;
         font-weight: bold;
         margin: 0;
         color: #00ff9d;
@@ -46,19 +46,19 @@ st.markdown("""
     
     .main-header p {
         color: #00ccff;
-        margin: 1rem 0 0;
-        font-size: 1.2rem;
+        margin: 0.4rem 0 0;
+        font-size: 1.1rem;
         letter-spacing: 1px;
         text-shadow: 0 0 5px #00ccff80;
     }
     
-    /* Chat title */
+    /* Chat title - reduced padding */
     .chat-title {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-bottom: 1.5rem;
-        padding: 1rem;
+        margin-bottom: 0.75rem;
+        padding: 0.75rem;
         background: rgba(0, 255, 157, 0.05);
         border-radius: 8px;
         border: 1px solid #00ff9d40;
@@ -66,7 +66,7 @@ st.markdown("""
     
     .chat-title h1 {
         margin: 0;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
     
     /* Sidebar */
@@ -87,19 +87,25 @@ st.markdown("""
         font-family: 'Courier New', monospace;
     }
     
-    /* Headers */
-    h1, h2, h3 {
-        color: #00ff9d !important;
-        text-shadow: 0 0 10px #00ff9d40;
+    /* Headers with reduced margins */
+    .stSidebar h1 {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.75rem !important;
+        font-size: 1.6rem !important;
     }
     
-    /* Chat messages */
+    .stSidebar h2, .stSidebar h3 {
+        margin-top: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Chat messages with reduced padding */
     .stChatMessage {
         background-color: #1a1a2f;
         border: 1px solid #00ff9d20;
         border-radius: 5px;
-        padding: 10px;
-        margin: 5px 0;
+        padding: 8px;
+        margin: 4px 0;
     }
     
     /* Buttons */
@@ -109,6 +115,10 @@ st.markdown("""
         border: 1px solid #00ff9d;
         border-radius: 5px;
         transition: all 0.3s ease;
+        padding: 0.3rem 1rem !important;
+        white-space: nowrap !important;
+        display: inline-block !important;
+        min-width: 120px !important;
     }
     
     .stButton > button:hover {
@@ -117,10 +127,47 @@ st.markdown("""
         box-shadow: 0 0 15px #00ff9d40;
     }
     
+    /* Fix for vertical text in button */
+    .clear-chat-btn span {
+        display: inline-block !important;
+        white-space: nowrap !important;
+    }
+    
     /* Selectbox */
     .stSelectbox > div > div {
         background-color: #2a2a4f;
         border: 1px solid #00ff9d40;
+    }
+    
+    /* Smaller tab text */
+    button[data-baseweb="tab"] {
+        font-size: 0.85rem !important;
+        padding: 0.5rem 0.75rem !important;
+    }
+    
+    /* Expander padding */
+    .streamlit-expanderHeader {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    
+    /* Reduce caption size */
+    .caption {
+        font-size: 0.8rem !important;
+    }
+    
+    /* Header spacing */
+    h1, h2, h3 {
+        color: #00ff9d !important;
+        text-shadow: 0 0 10px #00ff9d40;
+        margin-top: 0.75rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* Help text */
+    .helper-text {
+        font-size: 0.8rem !important;
+        padding-top: 0.25rem !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -189,19 +236,19 @@ POPULAR_MODELS = {
     "deepseek": "DeepSeek Coder - Excellent for code generation and completion",
 }
 
-# Sidebar for model selection and configuration
+# Sidebar for model selection and configuration - more compact layout
 with st.sidebar:
     st.title("🧠 NeuralNexus Settings")
     
-    # Model management section
+    # Model management section - more compact
     st.subheader("Model Management")
     
-    tab1, tab2 = st.tabs(["🔄 Select Model", "📥 Download Models"])
+    tab1, tab2 = st.tabs(["🔄 Select", "📥 Download"])
     
     with tab1:
         if not installed_models:
-            st.warning("No models installed! Head over to the 'Download Models' tab to get started →")
-            st.info("Click the 'Download Models' tab above to install your first model.")
+            st.warning("No models installed! Go to 'Download' tab →")
+            st.info("Click the 'Download' tab above.")
             st.stop()
         
         # Model selection - always visible
@@ -220,8 +267,8 @@ with st.sidebar:
             pass
     
     with tab2:
-        # Popular models download
-        st.markdown("### Popular Models")
+        # Popular models download - more compact
+        st.markdown("#### Popular Models")
         for model_name, description in POPULAR_MODELS.items():
             col1, col2 = st.columns([4, 1])
             with col1:
@@ -236,10 +283,10 @@ with st.sidebar:
                     st.markdown("✓")
         
         # Custom model download
-        st.markdown("### Custom Model")
-        custom_model = st.text_input("Enter model name", placeholder="e.g., orca-mini")
+        st.markdown("#### Custom Model")
+        custom_model = st.text_input("Model name", placeholder="e.g., orca-mini")
         if custom_model:
-            if st.button("Download Custom Model"):
+            if st.button("Download"):
                 if download_model(custom_model):
                     st.rerun()
 
@@ -247,16 +294,16 @@ with st.sidebar:
     
     # Advanced settings in an expander
     with st.expander("⚙️ Advanced Settings"):
-        st.markdown("### Model Configuration")
+        st.markdown("#### Model Configuration")
         
         # Generation settings
-        st.subheader("Generation Settings")
+        st.markdown("##### Generation")
         st.session_state.temperature = st.slider(
             "Temperature",
             min_value=0.0,
             max_value=2.0,
             value=0.7,
-            help="Higher values make the output more random, lower values make it more deterministic"
+            help="Higher = more random, lower = more deterministic"
         )
         
         st.session_state.context_length = st.slider(
@@ -269,30 +316,30 @@ with st.sidebar:
         )
         
         # Hardware settings
-        st.subheader("Hardware Settings")
+        st.markdown("##### Hardware")
         col1, col2 = st.columns(2)
         
         with col1:
             st.session_state.num_gpu = st.number_input(
-                "Number of GPUs",
+                "GPUs",
                 min_value=0,
                 max_value=8,
                 value=1,
-                help="Number of GPUs to use for generation (0 for CPU only)"
+                help="Number of GPUs to use (0 for CPU only)"
             )
         
         with col2:
             st.session_state.num_thread = st.number_input(
-                "Number of Threads",
+                "Threads",
                 min_value=1,
                 max_value=16,
                 value=4,
                 help="Number of CPU threads to use"
             )
         
-        # Detailed model information
+        # Detailed model information - more compact
         if isinstance(model_info, dict):
-            st.markdown("### Model Information")
+            st.markdown("##### Model Info")
             st.markdown(f"**Name:** {st.session_state.model}")
             if 'modified_at' in model_info:
                 st.markdown(f"**Modified:** {model_info['modified_at']}")
@@ -300,14 +347,14 @@ with st.sidebar:
                 details = model_info['details']
                 st.markdown(f"**Format:** {details.get('format', 'N/A')}")
     
+    # More compact about section
     st.markdown("---")
-    st.markdown("""
-    ### About
-    This is a simple interface for interacting with Ollama's language models.
-    Select a model from the dropdown and start chatting!
+    st.caption("""
+    **About:** A simple interface for Ollama models.
+    Select a model and start chatting!
     """)
 
-# Main chat interface
+# Main chat interface - more compact
 st.markdown("""
     <div class="chat-title">
         <h1>💬 Neural Interface</h1>
@@ -360,7 +407,9 @@ if prompt := st.chat_input("What would you like to ask?"):
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-# Clear chat button
-if st.button("Clear Chat"):
+# Fixed clear chat button with custom formatting
+st.markdown('<div style="display: flex; justify-content: flex-start; margin-bottom: 1rem;">', unsafe_allow_html=True)
+if st.button("🗑️ Clear", key="clear_chat"):
     st.session_state.messages = []
-    st.rerun() 
+    st.rerun()
+st.markdown('</div>', unsafe_allow_html=True) 

@@ -26,14 +26,14 @@ def run_streamlit():
     # Wait for Streamlit to start
     time.sleep(2)
     
-    # Create window with dark theme
+    # Create window with dark theme and slightly more compact size
     window = webview.create_window(
-        'Ollama Chat Interface',
+        'NeuralNexus - Local LLM Interface',
         'http://localhost:8501',
-        width=1200,
-        height=800,
+        width=1100,  # Slightly smaller width
+        height=750,  # Slightly smaller height
         resizable=True,
-        min_size=(800, 600),
+        min_size=(800, 600),  # Reasonable minimum size
         background_color='#0a0a12'  # Match the dark background
     )
     
