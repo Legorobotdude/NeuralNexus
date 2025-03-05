@@ -11,8 +11,11 @@ A sleek, cyberpunk-themed interface for running and interacting with Large Langu
 
 - **Local LLM Management**: Download, manage, and run various LLM models locally
 - **Seamless Chat Interface**: Interact with your local models through a modern chat UI
+- **Smart Memory Management**: Auto-unload models when not in use to save system resources
+- **Real-time Status Updates**: See the actual load status of your models with accurate indicators
+- **Preload Capability**: Load models before chatting with a single click
 - **Advanced Model Configuration**: Control temperature, context length, GPU, and CPU thread settings
-- **Cyberpunk UI**: Enjoy a visually appealing dark-themed interface
+- **Cyberpunk UI**: Enjoy a visually appealing dark-themed interface with neon accents
 
 ## 📋 Requirements
 
@@ -32,7 +35,12 @@ cd neuralnexus
 pip install -r requirements.txt
 ```
 
-3. Run the application:
+3. Run the application with the desktop window:
+```bash
+python3 window.py
+```
+
+Or run as a web app:
 ```bash
 streamlit run app.py
 ```
@@ -49,6 +57,7 @@ streamlit run app.py
 - **Context Length**: Adjust the token context window size
 - **GPU Settings**: Set the number of GPUs to use
 - **CPU Threads**: Control the number of CPU threads
+- **Auto-unload**: Toggle automatic unloading of models when the app is inactive to save memory
 
 ## 📝 License
 
@@ -57,4 +66,5 @@ MIT License
 ## 🙏 Acknowledgements
 
 - [Ollama](https://ollama.ai/) for making local LLMs accessible
-- [Streamlit](https://streamlit.io/) for the web app framework 
+- [Streamlit](https://streamlit.io/) for the web app framework
+- [PyWebView](https://pywebview.flowrl.com/) for the native desktop interface 
